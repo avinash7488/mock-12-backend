@@ -8,7 +8,7 @@ const { UserModel } = require("../modal/User.model");
 const userRouter= express.Router();
 
 // below code can be used to get all products which are added by users ---------------->
-userRouter.get("/user",async(req,res)=>{
+userRouter.get("/",async(req,res)=>{
     const userID=req.body.userID;
     try{
         const user = await UserModel.find({userID});
