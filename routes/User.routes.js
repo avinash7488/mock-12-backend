@@ -19,6 +19,24 @@ userRouter.get("/user",async(req,res)=>{
 })
  
 
+
+userRouter.patch("/calculator",async(req,res)=>{
+    const userID=req.body.userID;
+    const {p,i,n}=req.body;
+    i=i/100;
+    try{
+        const F= p*[(((1+i)^n)-1)/i];
+        const TI = p * n;
+        const TG = F - TI;
+        await UserModel.findByIdAndUpdate({_id:userID},{total_Investment_Amount:TI,
+            total_Interest_Gained:TG,
+            total_Maturity_Value:F ,});
+        res.send(user)
+    }catch(err){
+        res.send({"msg":"cannot Calculate","error":err.message})
+    }
+})
+
 // below code can be used to Logout Account by users---------------->
 userRouter.patch("/logout",async(req,res)=>{
     const userID=req.body.userID;
