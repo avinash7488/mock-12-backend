@@ -22,7 +22,7 @@ userRouter.get("/",async(req,res)=>{
 
 userRouter.post("/calculator",async(req,res)=>{
     const {p,i,n}=req.body;
-    const r=1/100
+    const r=i/100
     try{
         const F= Math.floor(p*((((1+r)**n)-1)/r));
         const TI = p*n;
