@@ -20,18 +20,17 @@ userRouter.get("/",async(req,res)=>{
  
 
 
-userRouter.patch("/calculator",async(req,res)=>{
-    const userID=req.body.userID;
+userRouter.post("/calculator",async(req,res)=>{
     const {p,i,n}=req.body;
-    i=i/100;
+    const r=1/100
     try{
-        const F= Math.floor(p*((((1+i)**n)-1)/i));
+        const F= Math.floor(p*((((1+r)**n)-1)/r));
         const TI = p*n;
         const TG = F - TI;
-        const user = await UserModel.findByIdAndUpdate({_id:userID},{total_Investment_Amount:TI,
+        const obj = {total_Investment_Amount:TI,
             total_Interest_Gained:TG,
-            total_Maturity_Value:F});
-        res.send(user)
+            total_Maturity_Value:F};
+        res.send(obj)
     }catch(err){
         res.send({"msg":"cannot Calculate","error":err.message})
     }
